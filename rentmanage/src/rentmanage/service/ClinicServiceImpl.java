@@ -62,6 +62,7 @@ public class ClinicServiceImpl implements ClinicService {
 
     @Transactional
     public void saveOwner(Owner owner) throws DataAccessException {
+    	System.out.println(111);
         ownerRepository.save(owner);
     }
 
