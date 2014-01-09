@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.li</groupId>
 	<artifactId>rentmanage</artifactId>
@@ -178,12 +179,12 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>${slf4j.version}</version>	
+			<version>${slf4j.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>${logback.version}</version>		
+			<version>${logback.version}</version>
 		</dependency>
 
 		<!-- used for Atom -->
@@ -209,7 +210,8 @@
 		</dependency>
 
 		<!-- Databases - Uses HSQL by default -->
-		<!-- <dependency> <groupId>mysql</groupId> <artifactId>mysql-connector-java</artifactId> <version>${mysql.version}</version> </dependency> -->
+		<!-- <dependency> <groupId>mysql</groupId> <artifactId>mysql-connector-java</artifactId> 
+			<version>${mysql.version}</version> </dependency> -->
 		<dependency>
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
@@ -229,7 +231,8 @@
 		</dependency>
 
 		<!-- MySQL JDBC Connector -->
-		<!-- <dependency> <groupId>mysql</groupId> <artifactId>mysql-connector-java</artifactId> <version>${mysql.version}</version> </dependency> -->
+		<!-- <dependency> <groupId>mysql</groupId> <artifactId>mysql-connector-java</artifactId> 
+			<version>${mysql.version}</version> </dependency> -->
 		<!-- HIBERNATE -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -338,10 +341,26 @@
 
 	</dependencies>
 
-	<!-- all Maven plugin versions are mentioned in order to guarantee the build reproducibility in the long term -->
+	<!-- all Maven plugin versions are mentioned in order to guarantee the build 
+		reproducibility in the long term -->
 	<build>
+
 		<defaultGoal>install</defaultGoal>
 		<plugins>
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<configuration>
+					<webAppSourceDirectory>${basedir}/WebRoot</webAppSourceDirectory>
+					<webApp>
+						<contextPath>/</contextPath>
+						<descriptor>${basedir}/WebRoot/WEB-INF/web.xml</descriptor>
+						<defaultsDescriptor>${basedir}/WebRoot/WEB-INF/web.xml</defaultsDescriptor>
+						<allowDuplicateFragmentNames>true</allowDuplicateFragmentNames>
+					</webApp>
+					<jettyXml>config/misc/jetty.xml</jettyXml>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -371,25 +390,24 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.3</version>
 				<configuration>
-				<!-- ´ò°üÅäÖÃ-->
 					<warName>rent</warName>
 					<webResources>
-                        <resource>
-                            <directory>WebRoot\WEB-INF</directory>
-                            <targetPath>WEB-INF</targetPath>
-                            <filtering>true</filtering>
-                        </resource>
 						<resource>
-                            <directory>WebRoot\resources</directory>
-                            <targetPath>resources</targetPath>
-                            <filtering>true</filtering>
-                        </resource>
+							<directory>WebRoot\WEB-INF</directory>
+							<targetPath>WEB-INF</targetPath>
+							<filtering>true</filtering>
+						</resource>
 						<resource>
-                            <directory>WebRoot\images</directory>
-                            <targetPath>images</targetPath>
-                            <filtering>true</filtering>
-                        </resource>
-                    </webResources>
+							<directory>WebRoot\resources</directory>
+							<targetPath>resources</targetPath>
+							<filtering>true</filtering>
+						</resource>
+						<resource>
+							<directory>WebRoot\images</directory>
+							<targetPath>images</targetPath>
+							<filtering>true</filtering>
+						</resource>
+					</webResources>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -496,20 +514,19 @@
 			</plugins>
 		</pluginManagement>
 
-	<directory>target</directory>
-    <sourceDirectory>src</sourceDirectory>
-	 <resources>
-            <resource>
-                <directory>config</directory>
-                <excludes>
-                    <exclude>**/*.java</exclude>
-                </excludes>
-            </resource>
-    </resources>
-
-	
-       
+		<directory>target</directory>
+		<sourceDirectory>src</sourceDirectory>
+		<resources>
+			<resource>
+				<directory>config</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+		</resources>
 
 	</build>
+
+
 
 </project>
